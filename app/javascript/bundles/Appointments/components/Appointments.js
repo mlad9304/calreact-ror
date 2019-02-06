@@ -11,7 +11,7 @@ class Appointments extends React.Component {
     this.state = {
       appointments: props.appointments,
       title: { value: '', valid: false },
-      appt_time: { value: '', valid: false },
+      appt_time: { value: new Date(), valid: false },
       formErrors: {},
       formValid: false,
     };
@@ -120,8 +120,8 @@ class Appointments extends React.Component {
       <React.Fragment>
         <FormErrors formErrors={formErrors} />
         <AppointmentForm
-          title={title.value}
-          appt_time={appt_time.value}
+          title={title}
+          appt_time={appt_time}
           onUserInput={handleUserInput}
           onFormSubmit={handleFormSubmit}
           formValid={formValid}

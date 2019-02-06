@@ -35,11 +35,11 @@ class AppointmentForm extends React.Component {
           <input
             name="title"
             placeholder="Appointment title"
-            value={title}
+            value={title.value}
             onChange={handleChange}
           />
           <Datetime input={false} open={true} inputProps={inputProps}
-            value={appt_time}
+            value={appt_time.value}
             onChange={event => setApptTime(event)}
           />
           <input
@@ -55,8 +55,14 @@ class AppointmentForm extends React.Component {
 }
 
 AppointmentForm.propTypes = {
-  title: PropTypes.string,
-  appt_time: PropTypes.any,
+  title: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    valid: PropTypes.bool.isRequired,
+  }),
+  appt_time: PropTypes.shape({
+    value: PropTypes.instanceOf(Date).isRequired,
+    valid: PropTypes.bool.isRequired,
+  }),
   formValid: PropTypes.bool,
   onUserInput: PropTypes.func,
   onFormSubmit: PropTypes.func,
