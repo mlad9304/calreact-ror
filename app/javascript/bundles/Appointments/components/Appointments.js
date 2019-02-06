@@ -2,14 +2,16 @@ import React from "react"
 import PropTypes from "prop-types"
 import AppointmentForm from "./AppointmentForm";
 import AppointmentList from "./AppointmentList";
+import FormErrors from './FormErrors';
 class Appointments extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       appointments: props.appointments,
-      title: 'Team startup meeting',
-      appt_time: 'Tomorrow at 9am',
+      title: '',
+      appt_time: '',
+      formErrors: {},
     };
   }
 
@@ -33,20 +35,34 @@ class Appointments extends React.Component {
 
   handleFormSubmit = () => {
     const { title, appt_time } = this.state;
-    const { addNewAppointment } = this;
+    const { addNewAppointment, resetFormErrors } = this;
     $.post(
       '/appointments',
       { appointment: { title, appt_time } },
     ).done(data => {
       addNewAppointment(data);
+      resetFormErrors();
+    }).fail(response => {
+      this.setState(prevState => ({
+        ...prevState,
+        formErrors: response.responseJSON,
+      }));
     });
   };
 
+  resetFormErrors = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      formErrors: {},
+    }));
+  };
+
   render () {
-    const { appointments, title, appt_time } = this.state;
+    const { appointments, title, appt_time, formErrors } = this.state;
     const { handleUserInput, handleFormSubmit } = this;
     return (
       <React.Fragment>
+        <FormErrors formErrors={formErrors} />
         <AppointmentForm
           input_title={title}
           input_appt_time={appt_time}

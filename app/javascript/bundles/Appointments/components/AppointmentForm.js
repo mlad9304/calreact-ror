@@ -40,12 +40,6 @@ class AppointmentForm extends React.Component {
             value={input_title}
             onChange={handleChange}
           />
-          <input
-            name="appt_time"
-            placeholder="Date and Time"
-            value={input_appt_time}
-            onChange={handleChange}
-          />
           <Datetime input={false} open={true} inputProps={inputProps}
             value={input_appt_time}
             onChange={event => setApptTime(event)}
