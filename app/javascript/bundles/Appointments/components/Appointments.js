@@ -12,13 +12,24 @@ class Appointments extends React.Component {
       title: '',
       appt_time: '',
       formErrors: {},
+      formValid: true,
     };
   }
 
   handleUserInput = obj => {
+    const { validateForm } = this;
     this.setState(prevState => ({
       ...prevState,
       ...obj,
+    }), () => {
+      validateForm();
+    });
+  };
+
+  validateForm = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      formValid: prevState.title.trim().length > 2,
     }));
   };
 
@@ -30,6 +41,7 @@ class Appointments extends React.Component {
     this.setState(prevState => ({
       ...prevState,
       appointments: appointments.sort((a, b) => (new Date(a.appt_time) - new Date(b.appt_time))),
+      formValid: true,
     }));
   };
 
@@ -58,7 +70,7 @@ class Appointments extends React.Component {
   };
 
   render () {
-    const { appointments, title, appt_time, formErrors } = this.state;
+    const { appointments, title, appt_time, formErrors, formValid } = this.state;
     const { handleUserInput, handleFormSubmit } = this;
     return (
       <React.Fragment>
@@ -68,6 +80,7 @@ class Appointments extends React.Component {
           input_appt_time={appt_time}
           onUserInput={handleUserInput}
           onFormSubmit={handleFormSubmit}
+          formValid={formValid}
         />
         <AppointmentList appointments={appointments} />
       </React.Fragment>
