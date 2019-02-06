@@ -5,9 +5,9 @@ import 'react-datetime/css/react-datetime';
 class AppointmentForm extends React.Component {
   handleChange = e => {
     const { onUserInput } = this.props;
-    onUserInput({
-      [e.target.name]: e.target.value,
-    });
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
+    onUserInput(fieldName, fieldValue);
   };
 
   handleSubmit = e => {
@@ -17,11 +17,9 @@ class AppointmentForm extends React.Component {
   };
 
   setApptTime = e => {
-    const name = 'appt_time';
-    const obj = {};
-    if(obj[name] = e.toDate()) {
-      this.props.onUserInput(obj);
-    }
+    const fieldName = 'appt_time';
+    const fieldValue = e.toDate();
+    this.props.onUserInput(fieldName, fieldValue);
   }
 
   render () {
