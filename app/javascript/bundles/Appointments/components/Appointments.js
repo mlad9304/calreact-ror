@@ -76,8 +76,8 @@ class Appointments extends React.Component {
       <React.Fragment>
         <FormErrors formErrors={formErrors} />
         <AppointmentForm
-          input_title={title}
-          input_appt_time={appt_time}
+          title={title}
+          appt_time={appt_time}
           onUserInput={handleUserInput}
           onFormSubmit={handleFormSubmit}
           formValid={formValid}

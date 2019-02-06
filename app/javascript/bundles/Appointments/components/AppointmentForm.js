@@ -25,10 +25,10 @@ class AppointmentForm extends React.Component {
   }
 
   render () {
-    const { input_title, input_appt_time, formValid } = this.props;
+    const { title, appt_time, formValid } = this.props;
     const { handleChange, handleSubmit, setApptTime } = this;
     const inputProps = {
-      name: 'input_appt_time',
+      name: 'appt_time',
     };
     return (
       <React.Fragment>
@@ -37,11 +37,11 @@ class AppointmentForm extends React.Component {
           <input
             name="title"
             placeholder="Appointment title"
-            value={input_title}
+            value={title}
             onChange={handleChange}
           />
           <Datetime input={false} open={true} inputProps={inputProps}
-            value={input_appt_time}
+            value={appt_time}
             onChange={event => setApptTime(event)}
           />
           <input
@@ -57,8 +57,8 @@ class AppointmentForm extends React.Component {
 }
 
 AppointmentForm.propTypes = {
-  input_title: PropTypes.string,
-  input_appt_time: PropTypes.any,
+  title: PropTypes.string,
+  appt_time: PropTypes.any,
   formValid: PropTypes.bool,
   onUserInput: PropTypes.func,
   onFormSubmit: PropTypes.func,
