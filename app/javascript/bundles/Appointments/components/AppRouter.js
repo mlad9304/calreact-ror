@@ -7,7 +7,7 @@ const AppRouter = (props) => {
     return (
         <Router>
             <Switch>
-                <Route path="/" render={routeProps => (
+                <Route exact path="/" render={routeProps => (
                     <Appointments {...routeProps} appointments={props.appointments} />
                 )} />
                 <Route path="/appointments/:id" component={Appointment} />
