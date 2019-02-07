@@ -1,13 +1,19 @@
 import React from 'react';
-import { StaticRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Appointments from './Appointments';
+import Appointment from './Appointment';
 
 const AppRouter = (props) => {
     return (
-        <Router context={{}}>
-            <Route path="/" render={routeProps => (
-                <Appointments {...routeProps} appointments={props.appointments} />
-            )} />
+        <Router>
+            <div>
+                <Route path="/" render={routeProps => (
+                    <Appointments {...routeProps} appointments={props.appointments} />
+                )} />
+                <Route path="/appointments/:id" render={routeProps => (
+                    <Appointment {...routeProps} />
+                )} />
+            </div>
         </Router>
     );
 }
